@@ -11,7 +11,7 @@ const Trip = db.define('trip', {
         allowNull: false
     },
     Date: {
-        type: DataTypes.Date,
+        type: DataTypes.STRING,
         allowNull: false
     },
     Flying: {

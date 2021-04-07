@@ -1,1 +1,4 @@
-module.exports = { usercontroller: require('./usercontroller') }
+module.exports = {
+    usercontroller: require('./usercontroller'),
+    tripscontroller: require('./tripscontroller')
+};

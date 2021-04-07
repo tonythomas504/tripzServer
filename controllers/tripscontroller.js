@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { Trip } = require('../models');
 
 
 router.get("/", (req, res) => {
-    Playlist.findAll()
+    Trip.findAll()
         .then(trip => res.status(200).json(trip))
         .catch(err => res.status(500).json({
             error: err
@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
-    Playlist.findOne({
+    Trip.findOne({
         where: {
             id: req.params.id
         }
@@ -33,7 +33,7 @@ router.post('/createtrip', (req, res) => {
         Driving: req.body.Driving
     };
 
-    Trips.create(trips)
+    Trip.create(trips)
         .then(trips => res.status(200).json(trips))
         .catch(err => res.status(500).json({ error: err.message || serverErrorMsg }))
 })
@@ -41,19 +41,19 @@ router.post('/createtrip', (req, res) => {
 router.put("/:id", (req, res) => {
     const query = req.params.id;
 
-    Trips.update(req.body,
+    Trip.update(req.body,
         { where: { id: query } })
-        .then((tripsUpdated) => {
-            Trips.findOne({
+        .then((tripUpdated) => {
+            Trip.findOne({
                 where: {
                     id: query
                 }
             })
-                .then((locatedUpdatedTrips) => {
+                .then((locatedUpdatedTrip) => {
                     res.status(200).json({
-                        trip: locatedUpdatedTrips,
+                        trip: locatedUpdatedTrip,
                         message: "Trip successfully updated",
-                        tripChanged: tripsUpdated,
+                        tripChanged: tripUpdated,
                     });
                 })
         })
@@ -62,7 +62,7 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
 
-    Trips.destroy({
+    Trip.destroy({
         where: { id: req.params.id }
     })
         .then(trip => res.status(200).json(trip))

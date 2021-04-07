@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const express = require("express");
-const router = express.Router();
 
 const db = require("./db")
 
@@ -14,6 +13,7 @@ const controllers = require("./controllers")
 app.use(express.json());
 
 app.use("/user", controllers.usercontroller)
+app.use("/trip", controllers.tripscontroller)
 
 
 
@@ -26,3 +26,5 @@ db.authenticate()
         console.log("[Server: ] Server Crashed")
         console.log(err)
     })
+
+
